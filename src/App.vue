@@ -1,5 +1,6 @@
 <script setup>
 import Index from './pages/Index.vue';
+import Cards from './pages/Cards.vue';
 import { ref } from 'vue';
 
 const renderIndex = ref(true);
@@ -24,6 +25,7 @@ function changePage(newPage) {
 <template>
 	<div class="background-container"></div>
 	<Index v-if="renderIndex" @cards="changePage('cards')" @preset="changePage('preset')" />
+	<Cards v-if="renderCards" />
 </template>
 
 <style scoped>
