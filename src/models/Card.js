@@ -62,4 +62,12 @@ export class Card {
 			new Card('Arsonist', 0, 1, ''),
 		];
 	}
+
+	static presets() {
+		return [
+			[new Card('Villager', 7, 7, ''), new Card('Werewolf', 5, 5, ''), new Card('Seer', 1, 1, '')],
+			[new Card('Villager', 8, 8, ''), new Card('Werewolf', 5, 5, ''), new Card('Seer', 1, 1, ''), new Card('Witch', 1, 1, '')],
+			[new Card('Villager', 9, 9, ''), new Card('Werewolf', 5, 5, ''), new Card('Seer', 1, 1, ''), new Card('Witch', 1, 1, ''), new Card('Hunter', 1, 1, '')],
+		];
+	}
 }

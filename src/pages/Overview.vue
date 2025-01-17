@@ -16,15 +16,15 @@ const props = defineProps({
 		<h1>Overview</h1>
 		<h3>Selected Cards</h3>
 	</div>
-	<div class="content scroll">
-		<table>
-			<tr v-for="card in cards">
-				<td><img :src="card.img" alt="Card Image" /></td>
-				<td>{{ card.name }}</td>
-				<td>x{{ card.amount }}</td>
-			</tr>
-		</table>
-	</div>
+		<div class="content scroll">
+			<table>
+				<tr v-for="card in cards">
+					<td><img :src="card.img" alt="Card Image" /></td>
+					<td>{{ card.name }}</td>
+					<td>x{{ card.amount }}</td>
+				</tr>
+			</table>
+		</div>
 	<div class="button-container">
 		<button @click="emit('start')">Start Game</button>
 		<button @click="emit('back')">Back</button>
@@ -49,30 +49,31 @@ const props = defineProps({
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 50vh;
+	height: calc(50vh - 2rem);
 	width: 100%;
 	max-width: 30rem;
 	position: relative;
 	text-align: center;
 	margin: auto;
+	padding: 0rem;
 	position: absolute;
-	top: 20vh;
+	top: calc(20vh + 2rem);
 	left: calc(50% - 15rem);
 	overflow-y: scroll;
 }
 
 .button-container {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  width: 100%;
-  height: calc(30vh - 2rem);
-  margin-bottom: 2rem;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	width: 100%;
+	height: calc(30vh - 2rem);
+	margin-bottom: 2rem;
 }
 
 /* width */
 .scroll::-webkit-scrollbar {
-	width: 1rem;
+	width: 0rem;
 }
 
 /* Track */
@@ -100,6 +101,8 @@ table {
 	width: 95%;
 	top: 0rem;
 	left: 0rem;
+	margin: 0rem;
+	padding: 0rem;
 }
 
 .button-container {

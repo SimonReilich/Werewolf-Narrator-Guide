@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Index from './pages/Index.vue';
+import Preset from './pages/Presets.vue';
 import Cards from './pages/Cards.vue';
 import Overview from './pages/Overview.vue';
 import { ref } from 'vue';
@@ -11,14 +12,28 @@ const renderPreset = ref(false);
 const renderOverview = ref(false);
 const renderGame = ref(false);
 
+const last = ref<string>('index');
+
 const cards = ref<Card[]>([]);
 
 function changePage(newPage: string) {
-  renderIndex.value = false;
-  renderCards.value = false;
-  renderPreset.value = false;
-  renderOverview.value = false;
-  renderGame.value = false;
+
+  if(renderIndex.value) {
+    last.value = 'index';
+    renderIndex.value = false;
+  } else if(renderCards.value) {
+    last.value = 'cards';
+    renderCards.value = false;
+  } else if(renderPreset.value) {
+    last.value = 'preset';
+    renderPreset.value = false;
+  } else if(renderOverview.value) {
+    last.value = 'overview';
+    renderOverview.value = false;
+  } else if(renderGame.value) {
+    last.value = 'game';
+    renderGame.value = false;
+  }
 
   if (newPage === 'index') {
     renderIndex.value = true;
@@ -33,6 +48,10 @@ function changePage(newPage: string) {
   }
 }
 
+const go_back = function() {
+  changePage(last.value);
+}
+
 function overview(parsed_cards: Card[]) {
   cards.value = parsed_cards;
   for (const card of cards.value) {
@@ -45,8 +64,9 @@ function overview(parsed_cards: Card[]) {
 <template>
   <div class="background-container"></div>
   <Index v-if="renderIndex" @cards="changePage('cards')" @preset="changePage('preset')" />
+  <Preset v-if="renderPreset" @overview="overview"/>
   <Cards v-if="renderCards" @overview="overview"/>
-  <Overview v-if="renderOverview" :cards="cards" @start="changePage('game')" @back="changePage('cards')"/>
+  <Overview v-if="renderOverview" :cards="cards" @start="changePage('game')" @back="go_back"/>
 </template>
 
 <style scoped>
